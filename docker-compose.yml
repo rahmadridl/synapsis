@@ -1,0 +1,49 @@
+
+version: '3.8'
+services:
+  api:
+    image: api-adameds-auth:latest
+    container_name: api-adameds-auth
+    restart: always
+    # build: .
+    ports:
+      - '3004:5555'
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    networks:
+      - simklinik
+  api-2:
+    image: api-adameds-auth:latest
+    container_name: api-adameds-auth-2
+    restart: always
+    # build: .
+    ports:
+      - '3014:5555'
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    networks:
+      - simklinik
+  db:
+    container_name: db-auth-simklinik
+    restart: always
+    image: postgres
+    ports:
+      - '5435:5432'
+    volumes:
+      - ./Database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - data:/data/database
+    environment:
+      - POSTGRES_PASSWORD=resman56
+      - POSTGRES_DB=auth
+    networks:
+      - simklinik
+volumes: 
+ data: {}
+#define network
+networks:
+  simklinik:
+    driver: bridge
