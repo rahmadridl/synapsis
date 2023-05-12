@@ -25,17 +25,13 @@ export default async function createOne(req, res) {
                 );
               }
             var create_SignUp = {
-                clinic_id: req.body.clinic_id,
-                email: req.body.email,
+                username: req.body.username,
                 password: bcrypt.hashSync(req.body.password),
-                status: req.body.status,
-                role: req.body.role, 
-                name: req.body.name,
-                phone: req.body.phone,
                 created_at: convertTZ(new Date(Date.now()), "Asia/Jakarta"),
                 updated_at: convertTZ(new Date(Date.now()), "Asia/Jakarta"), 
             };
             let SignUp = await createSignUp(create_SignUp) 
+            delete SignUp.dataValues.password
             return success("Register Berhasil!", 201, SignUp, res);
         }
     } catch (error) {

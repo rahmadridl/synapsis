@@ -5,8 +5,8 @@ import cors from "cors"
 
 const { json } = pkg;
 
-const PORT = 5555;
-const HOST = "0.0.0.0";
+const PORT = process.env.PORTSERVER;
+const HOST = process.env.HOSTSERVER;
 
 const app = express();
 app.use(express.json({limit:'50mb'}));

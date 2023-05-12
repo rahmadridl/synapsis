@@ -1,11 +1,9 @@
 import { AuthRoutes } from "../Services/Auth/AuthRouter.js";
-import { rolesRoutes } from "../Services/Roles/RolesRoutes.js";
-import { permissionRoutes } from "../Services/Permission/PermissionRoutes.js";
+import { cartRoutes } from "../Services/Cart/CartRoutes.js";
 
 const MainRoutes = (app) => {
     AuthRoutes(app);
-    rolesRoutes(app);
-    permissionRoutes(app)
+    cartRoutes(app)
 };
   
 export default MainRoutes;
